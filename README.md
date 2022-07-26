@@ -1,2 +1,26 @@
-# pp5
-This is the code of the paper of the generalized Fermat equation x^p + y^p = z^5.
+### The generalized Fermat equation $x^p + y^p = z^5$
+
+Below is a description of the electronic resources for the paper *`A modular approach to Fermat equations of signature (p,p,5) using Frey hyperelliptic curves’* by I. Chen and A. Koutsianas.
+
+For each result that requires computation, we list below the file containing the code to accomplish this:
+
+**Proposition 10**: 
+- *Rational_points_on_X0_20_over_K_zeta5.m*
+
+**Lemma 16**:
+- *J_plus_conductor_at_5.m*
+
+**Proposition 18**:
+- *J_minus_potential_multiplicative_reduction_at_2.m*
+
+**Proposition 24**:
+- *J_minus_conductor_at_5.m*
+
+**Theorem 29**:
+- *J_plus_irreducible.m*
+
+**Proof of Theorem 1 case (I)**: 
+- *Theorem_1_case_I_elimination.m*
+
+**Proof of Theorem 1 case (II)**: 
+- *Theorem_1_case_II_elimination.m*
