@@ -8,16 +8,16 @@ For each result that requires computation, we list below the file containing the
 - *Rational_points_on_X0_20_over_K_zeta5.m*
 
 **Lemma 16**:
-- *J_plus_conductor_at_5.m*
+- *Jplus_conductor_at_5.m*
 
 **Proposition 18**:
-- *J_minus_potential_multiplicative_reduction_at_2.m*
+- *Jminus_potential_multiplicative_reduction_at_2.m*
 
 **Proposition 24**:
-- *J_minus_conductor_at_5.m*
+- *Jminus_conductor_at_5.m*
 
 **Theorem 29**:
-- *J_plus_irreducible.m*
+- *Jplus_irreducible.m*
 
 **Proof of Theorem 1 case (I)**: 
 - *Theorem_1_case_I_elimination.m*
