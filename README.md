@@ -17,7 +17,7 @@ For each result that requires computation, we list below the file containing the
 - *Jminus_conductor_at_5.m*
 
 **Theorem 29**:
-- *Jplus_irreducible.m*
+- *Jplus_irreducibility.m*
 
 **Proof of Theorem 1 case (I)**: 
 - *Theorem_1_case_I_elimination.m*
