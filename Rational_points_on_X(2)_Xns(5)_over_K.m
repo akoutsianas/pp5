@@ -1,0 +1,47 @@
+
+// Verify that \rho_{L,5} does not have image in the normalizer of a non-split Cartan subgroup as a representation of G_K.
+
+K<z> := QuadraticField(5);
+R<x> := PolynomialRing(K);
+
+
+F<s,t> := FieldOfFractions(PolynomialRing(K,2));
+S<X> := PolynomialRing(F);
+
+
+// Fiber product of X(2) with Xns(5).
+
+// j-invariant j_L of Legendre curve in parameter t
+E := EllipticCurve(X*(X-1)*(X-s));
+
+N1 := Numerator(jInvariant(E)-1728);
+D1 := Denominator(jInvariant(E)-1728);
+Factorization(N1);
+Factorization(D1);
+
+// j-invariant j_ns of Xns(5) in parameter s
+jns := 125*s*(2*s+1)^3*(2*s^2+7*s+8)^3/(s^2+s-1)^5;
+jns-1728;
+N2 := Numerator(jns-1728);
+D2 := Denominator(jns-1728);
+Factorization(N2);
+Factorization(D2);
+
+// The equation j_L - 1728 = j_ns -1728 gives rise to the hyperelliptic curve given below.
+C1 := HyperellipticCurve(2*(x^2 + 7/2*x + 27/8)*(x^2+x-1));
+
+
+// This hyperelliptic curve has an odd degree model.
+HasOddDegreeModel(C1);
+
+// This is the odd degree model.
+f := (1/4*(-25*z + 50)*x^3 + 1/4*(-30*z + 65)*x^2 + (-4*z + 5)*x + 2)*4/(-25*z+50);
+
+// The elliptic curve arising from the odd degree model
+E1 := QuadraticTwist(EllipticCurve(f), -25*z+50);
+
+// The elliptic curve has rank 0.
+assert Rank(E1) eq 0;
+
+// The torsion subgroup over K has order 6 which must be all cuspidal as the fiber product of X(2) and Xns(5) has 6 cusps.
+assert #TorsionSubgroup(E1) eq 6;

@@ -12,15 +12,10 @@ RK<x> := PolynomialRing(K);
 OK := RingOfIntegers(K);
 q2 := SetToSequence(Support(2*OK))[1];
 q5 := SetToSequence(Support(5*OK))[1];
-Ds := [1, K!(-1), K!2, K!(-2), -2 + 2*r5, -2 - 2*r5, -4 + 4*r5, -4 - 4*r5];
-
-// Q5<z5> := ext<K | x^2 + u + 2>;
-// OQ5 := RingOfIntegers(Q5);
-
+Ds := [1, K!(-1), K!2, K!(-2), (1 - r5)/2, (r5 - 1)/2, r5 - 1, 1 - r5];
 
 N0 := q2 * q5^2;
 N1 := q2 * q5^3;
-
 
 decomp0 := NewformDecomposition(NewSubspace(HilbertCuspForms(K, N0)));
 decomp1 := NewformDecomposition(NewSubspace(HilbertCuspForms(K, N1)));
