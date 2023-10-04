@@ -1,0 +1,21 @@
+// The modular curve X_0(20).
+X := SmallModularCurve(20);
+
+// Base change to K = Q(\sqrt{5})).
+K := CyclotomicField(5);
+EK := ChangeRing(X,K);
+
+// Rank is 0 over K.
+assert Rank(EK) eq 0;
+
+// Torsion subgroup over K.
+TK, TKtoEK := TorsionSubgroup(EK);
+
+// The map to j-line.
+j20 := jInvariant(EK,20);
+
+// Loop through all torsion points over K and check they are cuspidal.
+for n := 1 to 6 do
+  P := n * TKtoEK(TK.1);
+  print P, Evaluate(j20,P);
+end for;

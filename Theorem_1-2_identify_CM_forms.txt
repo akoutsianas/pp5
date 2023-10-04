@@ -1,0 +1,67 @@
+
+
+// This program determines the conductor of the 2-dim p-adic representation of various J(a,-a,0).
+
+// Requires the Dokchitser-Doris packages for the conductor of genus 2 curves (https://cjdoris.github.io/Genus2Conductor/) and 
+// arithmetic with p-adic numbers (https://github.com/cjdoris/ExactpAdics2) to be installed in a subfolder named Doris from current path.
+
+AttachSpec("../Doris/ExactpAdics2/spec");
+AttachSpec("../Doris/Genus2Conductor/spec_ExactpAdics");
+import "../Doris/Genus2Conductor/EvenConductorExponent_Core.mag": SemistableType;
+
+
+QQ := Rationals();
+PolsQ<x> := PolynomialRing(QQ);
+F<b> := QuadraticField(5);
+O := Integers(F);
+PolsF<x> := PolynomialRing(F);
+
+I2:=Factorization(2*O)[1,1];
+I5:=Factorization(5*O)[1,1];
+
+
+
+// Confirm the conductor of the 2-dim p-adic representation of J(-8,8,0) twisted by Q(\sqrt{2}) is I2^2*I5^2.
+a:=-8;
+b:=8;
+c:=0;
+C := HyperellipticCurve(x^5 - 5*c^2*2^2*x^3 + 5*c^4*2^4*x - 2*(a-b)*2^5);
+N:=Conductor_Genus2(C);
+I5:=Factorization(5*O)[1,1];
+N1:=I2^2*I5^2;
+assert N eq N1^2;
+
+
+// Confirm the conductor of the 2-dim p-adic representation of J(-1,1,0) is I2^2*I5^3.
+a:=-1;
+b:=1;
+c:=0;
+C := HyperellipticCurve(x^5 - 5*c^2*x^3 + 5*c^4*x - 2*(a-b));
+N:=Conductor_Genus2(C);
+
+N1:=I2^2*I5^3;
+assert N eq N1^2;
+
+
+// Confirm the conductor of the 2-dim p-adic representation of J(-4,4,0) is I2^2*I5^3.
+a:=-4;
+b:=4;
+c:=0;
+C := HyperellipticCurve(x^5 - 5*c^2*x^3 + 5*c^4*x - 2*(a-b));
+N:=Conductor_Genus2(C);
+I5:=Factorization(5*O)[1,1];
+N1:=I2^2*I5^3;
+assert N eq N1^2;
+
+
+// Confirm the conductor of the 2-dim p-adic representation of J(-16,16,0) is I2^2*I5^3.
+a:=-16;
+b:=16;
+c:=0;
+C := HyperellipticCurve(x^5 - 5*c^2*x^3 + 5*c^4*x - 2*(a-b));
+N:=Conductor_Genus2(C);
+I5:=Factorization(5*O)[1,1];
+N1:=I2^2*I5^3;
+assert N eq N1^2;
+
+
