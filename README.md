@@ -4,26 +4,35 @@ Below is a description of the electronic resources for the paper *`A modular app
 
 For each result that requires computation, we list below the file containing the code to accomplish this:
 
-**Proposition 5.3**: 
-- Rational_points_on_X0_20_over_K_zeta5.m
-- Rational_points_on_X(2)_Xns(5)_over_K.m
+**Proposition 6.5**: 
+- Rational_points_on_X0(20)_over_K_zeta5.txt
+- Rational_points_on_X(2)_Xns(5)_over_K.txt
 
 
-**Proposition 6.8**:
-- J_minus_potential_multiplicative_reduction_at_2.m
+**Proposition 7.10**:
+- J_minus_potential_multiplicative_reduction_at_2.txt
 
 
-**Lemma 6.10**:
-- Unit_image.m
+**Lemma 7.12**:
+- Unit_image.txt
 
 
-**Proposition 6.15**:
-- J_minus_conductor_at_5.m
+**Proposition 7.18**:
+- J_minus_conductor_at_5.txt
 
 
-**Theorem 1 (case $2 \nmid ab$, $5 \mid ab$)**: 
-- Theorem_1_case_I_elimination.m
+**Remark 7.19**:
+- conductor_bound_wild_case.txt
+- conductor_bound_tame_case.txt
+
+
+**Theorem 8.6**:
+- Jplus_irreducibility.txt
+
+
+**Theorem 1 (I) (case $2 \nmid ab$, $5 \mid ab$)**: 
+- Theorem_1_case_(I)_elimination.txt
 
 
 **Theorem 1 (case $2 \mid ab$, $5 \nmid ab$)**:
-- Theorem_1_case_II_elimination.m
+- Theorem_1_case_II_elimination.txt

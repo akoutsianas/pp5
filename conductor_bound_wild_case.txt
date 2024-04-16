@@ -1,0 +1,73 @@
+
+// The conductor computations of J^- at 5
+
+
+
+// Upper bound of r
+
+Zx<x> := PolynomialRing(Integers());
+
+Q5 := pAdicField(5,100);
+RQ<u> := PolynomialRing(Q5);
+K<r5> := TotallyRamifiedExtension(Q5, u^2-5);
+
+RK<s> := PolynomialRing(K);
+M := TotallyRamifiedExtension(K, s^4-r5);
+OM := Integers(M);
+RM<t> := PolynomialRing(M);
+
+N:=25;
+for a0:=0 to N-1 do
+	for c0:=0 to N-1 do
+		b0 := (c0^5 - a0) mod 25;
+		d0 := -4*a0 - a0^5 - 10*a0^4*c0 - 35*a0^3*c0^2 - 50*a0^2*c0^3 - 25*a0*c0^4;
+		if (a0*b0 mod 5 ne 0) and (Valuation(d0,5) eq 1 ) then
+			f0 := x^5 - 5*c0^2*x^3 + 5*c0^4*x - 2*(a0-b0);
+			OMsp := SplittingField(f0, OM);
+			// printf "AbsoluteDegree(OMsp): %o, AbsoluteRamificationDegree: %o\n", AbsoluteDegree(OMsp), AbsoluteRamificationDegree(OMsp);
+			assert AbsoluteRamificationDegree(OMsp) eq 40;
+			assert AbsoluteRamificationDegree(BaseRing(OMsp)) eq 1;
+			funi := MinimalPolynomial(UniformizingElement(OMsp));
+			assert CoefficientRing(Parent(funi)) eq BaseRing(OMsp);
+			
+			rts := Roots(ChangeRing(funi, OMsp));
+			r1 := rts[1][1];
+			r := Max([Valuation(r1 - rt[1]): rt in rts | not IsZero(r1 - rt[1])]);
+			printf "rts: %o, r: %o\n", #rts, r;
+			assert r eq 3;
+		end if;
+	end for;
+end for;
+
+
+
+// Upper Bound of the valuation of different
+
+K<r5> := QuadraticField(5);
+RK<s> := PolynomialRing(K);
+M<rm> := ext<K | s^4 - r5>;
+OM := Integers(M);
+RM<t> := PolynomialRing(M);
+p5M := SetToSequence(Support(5*OM))[1];
+
+assert Valuation(Different(OM), p5M) eq 3;
+printf "The valuation of the different of the extension M/K is %o.\n\n", Valuation(Different(OM), p5M);  
+
+
+N:=25;
+for a0:=0 to N-1 do
+	for c0:=0 to N-1 do
+		b0 := (c0^5 - a0) mod 25;
+		d0 := -4*a0 - a0^5 - 10*a0^4*c0 - 35*a0^3*c0^2 - 50*a0^2*c0^3 - 25*a0*c0^4;
+		if (a0*b0 mod 5 ne 0) and (Valuation(d0,5) eq 1 ) then
+			f0 := t^5 - 5*c0^2*t^3 + 5*c0^4*t - 2*(a0-b0);
+			L := ext<M | f0>;
+			OL := Integers(L);
+			p5L := SetToSequence(Support(5*OL))[1];
+			dif := Valuation(Different(OL), p5L);
+			assert dif eq 12;
+			printf "dif val: %o\n", dif + 15;
+		end if;
+	end for;
+end for;
+

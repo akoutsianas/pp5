@@ -1,0 +1,26 @@
+// Conductor upper bound on the tame case
+
+// The value of r
+Q5 := pAdicField(5,100);
+RQ<u> := PolynomialRing(Q5);
+K<r5> := TotallyRamifiedExtension(Q5, u^2-5);
+
+RK<s> := PolynomialRing(K);
+M := TotallyRamifiedExtension(K, s^4-r5);
+OM := Integers(M);
+RM<t> := PolynomialRing(M);
+rts := [rt[1] : rt in Roots(t^4 - r5)];
+
+r := Max([Valuation(M.1 - rt): rt in rts | not IsZero(M.1 - rt)]);
+assert r eq 1;
+
+
+// the valuation of the different 
+K<r5> := QuadraticField(5);
+RK<s> := PolynomialRing(K);
+M<rm> := ext<K | s^4 - r5>;
+OM := Integers(M);
+RM<t> := PolynomialRing(M);
+p5M := SetToSequence(Support(5*OM))[1];
+
+assert Valuation(Different(OM), p5M) eq 3;
