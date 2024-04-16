@@ -38,6 +38,6 @@ For each result that requires computation, we list below the file containing the
 - Theorem_1_case_II_elimination.txt
 
 
-**Theorem 1.2**:
+**Theorem 1.2 (case $10 \mid ab$)**:
 - Theorem_1-2_identify_CM_forms.txt
 - Theorem_1-2_elimination.txt
