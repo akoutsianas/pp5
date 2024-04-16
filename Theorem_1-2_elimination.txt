@@ -1,5 +1,5 @@
 
-// In this file, we perform the elimination step for the equation x^p + y^p = z^5 under the assumption 2 | ab and 5 \nmid ab with (a,b,c) being a solution of the generalized Fermat equation.
+// In this file, we perform the elimination step for the equation x^p + y^p = z^5 under the assumption 10 | ab with (a,b,c) being a solution of the generalized Fermat equation.
 
 
 Q<z> := PolynomialRing(Rationals());
