@@ -35,7 +35,7 @@ For each result that requires computation, we list below the file containing the
 
 
 **Theorem 1 (case $2 \mid ab$, $5 \nmid ab$)**:
-- Theorem_1_case_II_elimination.txt
+- Theorem_1_case_(II)_elimination.txt
 
 
 **Theorem 1.2 (case $10 \mid ab$)**:
