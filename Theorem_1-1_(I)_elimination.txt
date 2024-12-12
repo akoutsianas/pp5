@@ -16,9 +16,10 @@ q5 := Factorization(5*OK)[1,1];
 
 N0 := q1;
 N1 := q5;
+N2 := q5^2;
 
 
 assert Dimension(NewSubspace(HilbertCuspForms(K, N0))) eq 0;
 assert Dimension(NewSubspace(HilbertCuspForms(K, N1))) eq 0;
-
+assert Dimension(NewSubspace(HilbertCuspForms(K, N2))) eq 0;
 
