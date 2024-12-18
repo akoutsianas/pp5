@@ -1,0 +1,25 @@
+// We compute symbolicly compute the special fibers for different primes for the curve C^-
+
+// a->a^p and b->b^p
+
+K<r5> := QuadraticField(5);
+R<a,b,c> := PolynomialRing(Rationals(),3);
+_<x> := PolynomialRing(R);
+
+
+// The case char \neq 2,5
+
+f := (x^5-5*c^2*x^3+5*c^4*x - 2*(0 - c^5));
+
+fac := Factorization(f);
+
+assert #fac eq 2;
+
+f2 := fac[2][1];
+assert Discriminant(f2) eq 5*c^2;
+
+
+
+// The case char = 5
+
+
