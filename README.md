@@ -9,19 +9,23 @@ For each result that requires computation, we list below the file containing the
 - Rational_points_on_X(2)_Xns(5)_over_K.txt
 
 
-**Proposition 7.10**:
+**Special fibre computations**:
+- compute_special_fiber_Cplus.txt (Lemma 7.5, Lemma 7.6)
+- compute_special_fiber_Cminus.txt (Lemma 7.20, Lemma 7.23)
+
+**Proposition 7.12**:
 - J_minus_potential_multiplicative_reduction_at_2.txt
 
 
-**Lemma 7.12**:
+**Lemma 7.14**:
 - Unit_image.txt
 
 
-**Proposition 7.18**:
+**Proposition 7.24**:
 - J_minus_conductor_at_5.txt
 
 
-**Remark 7.19**:
+**Remark 7.25**:
 - conductor_bound_wild_case.txt
 - conductor_bound_tame_case.txt
 

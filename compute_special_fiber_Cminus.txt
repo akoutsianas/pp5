@@ -7,7 +7,9 @@ R<a,b,c> := PolynomialRing(Rationals(),3);
 _<x> := PolynomialRing(R);
 
 
-// The case char \neq 2,5
+/////// The case char \neq 2,5 - Lemma 7.5 ///////
+
+// We consider q | a hence a=0\mod q, so in the model below we replace a by 0 and b=c^5 mod q.
 
 f := (x^5-5*c^2*x^3+5*c^4*x - 2*(0 - c^5));
 
@@ -20,6 +22,118 @@ assert Discriminant(f2) eq 5*c^2;
 
 
 
-// The case char = 5
+/////// The case char = 5 ///////
+
+K<r5> := QuadraticField(5);
+R<a,b,c> := PolynomialRing(K,3);
+_<x> := PolynomialRing(R);
+
+
+
+//// The case 5 | ab - Lemma 7.20 ////
+
+//// Case 5|a ////
+// We replace a -> 5^7*a since p>= 7
+
+f := x^5-5*c^2*x^3+5*c^4*x - 2*(5^7*a - (c^5 - 5^7*a));
+f := Evaluate(f, (-r5*x + c)/2)/r5^5;
+coef := Coefficients(f);
+assert coef eq [-2500*r5*a + 1/32*r5*c^5, -1/32*c^4, -1/16*r5*c^3, 1/16*c^2, 1/32*r5*c, -1/32];
+fb := 2*x^5 + c^2*x^3 + 2*c^4*x;
+fbequiv := 2*x * (x - c)^2 * (x + c)^2;
+assert (fb - fbequiv) eq 5*c^2*x^3;
+
+
+//// Case 5|b ////
+// We replace b -> 5^7*b since p>= 7
+
+f := x^5-5*c^2*x^3+5*c^4*x - 2*((c^5 - 5^7*b) - 5^7*b);
+f := Evaluate(f, (r5*x - c)/2)/r5^5;
+coef := Coefficients(f);
+assert coef eq [2500*r5*b - 1/32*r5*c^5, 1/32*c^4, 1/16*r5*c^3, -1/16*c^2, -1/32*r5*c, 1/32];
+fb := 3*x^5 - c^2*x^3 + 3*c^4*x;
+fbequiv := 3*x * (x - c)^2 * (x + c)^2;
+assert (fb - fbequiv) eq 5*c^2*x^3;
+
+
+
+//// Case 5\nmid ab - Lemma 7.23////
+
+f := x^5-5*c^2*x^3+5*c^4*x - 2*(a - (c^5 - a));
+F := f - (x + a + 2*c)^5;
+
+// We check that the coefficients of F are all divisible by 5. Hence the singular point of the reduction of f is at -a - 2*c mod 5
+
+for coef in Coefficients(F) do
+  for a0 in [1..4] do
+    for c0 in [0..4] do
+      b0 := c0^5 - a0;
+      assert Integers()!(Evaluate(coef, [a0, b0, c0])) mod 5 eq 0;
+    end for;
+  end for;
+end for;
+
+f := Evaluate(f, x - a - 2*c);
+
+// We check the valuation of the coefficients of f over ZZ and then we get the valuation vectors over M since v_M(5) = 8
+// We take all possible classes modulo 25
+
+// Compute the valuation vectors of the model after the change of variables
+
+for a0 in [1..4] do
+  for c0 in [0..4] do
+    b0 := c0^5 - a0;
+    if b0 mod 5 ne 0 then
+      coef0s := [Integers()!(Evaluate(coef, [a0, b0, c0])) : coef in Coefficients(f)];
+      d0 := coef0s[1];
+      
+      // The term of x^5 is always 1
+      assert coef0s[6] eq 1;
+      
+      // The constant term d0 is always divisible by 5
+      assert Valuation(d0, 5) ne 0;
+      
+      // the valuation vector of the other terms
+      assert Valuation(coef0s[2], 5) eq 1;
+      assert Valuation(coef0s[3], 5) ge 1;
+      assert Valuation(coef0s[4], 5) eq 1;
+      assert Valuation(coef0s[5], 5) ge 1;
+    end if;
+  end for;
+end for;
+
+
+
+/// Valuation vector over L ///
+
+K<r5> := QuadraticField(5);
+_<x> := PolynomialRing(K);
+M<r5> := ext<K | x^4 - r5>; // one degree 4 totally ramified extension of K
+qM5 := Decomposition(M, 5)[1][1];
+_<y> := PolynomialRing(M);
+
+for a0 in [1..25] do
+  for c0 in [1..25] do
+    b0 := c0^5 - a0;
+    if (a0*b0) mod 5 ne 0 then
+      phi0 := y^5 - 5*c0^2*y^3 + 5*c0^4*y - 2*(a0 - b0);
+      g0 := Evaluate(phi0, y - a0 - 2*c0);
+      d0 := Coefficients(g0)[1];
+      if Valuation(d0, qM5) eq 8 then
+        assert IsIrreducible(g0);
+        L<rl> := ext<M | g0>;
+        _<z> := PolynomialRing(L);
+        qL5 := Decomposition(L, 5)[1][1];
+        G0 := Evaluate(g0, z + rl);
+        val_vector := [Valuation(coef, qL5) : coef in Coefficients(G0)];
+        assert val_vector[1] ge 80;
+        assert val_vector[2] eq 40;
+        assert val_vector[3] ge 40;
+        assert val_vector[4] eq 40;
+        assert val_vector[5] ge 40;
+      end if;
+    end if;
+  end for;
+end for;
 
 

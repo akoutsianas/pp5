@@ -7,7 +7,9 @@ R<a,b,c> := PolynomialRing(Rationals(),3);
 _<x> := PolynomialRing(R);
 
 
-/////// The case char \neq 2,5 ///////
+/////// The case char \neq 2,5 - Lemma 7.5 ///////
+
+// We consider q | a hence a=0\mod q, so in the model below we replace a by 0 and b=c^5 mod q.
 
 R<a,b,c> := PolynomialRing(Rationals(),3);
 _<x> := PolynomialRing(R);
@@ -31,7 +33,7 @@ assert Discriminant(f2) eq 5*c^2;
 
 
 
-/////// The case char = 5 ///////
+/////// The case char = 5 - Lemma 7.6///////
 
 K<r5> := QuadraticField(5);
 R<a,b,c> := PolynomialRing(K,3);

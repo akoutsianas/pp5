@@ -1,5 +1,5 @@
 
-// The conductor computations of J^- at 5
+// The conductor computations of J^- at 5 when 5\nmid ab 
 
 Q5 := pAdicField(5,100);
 RQ<u> := PolynomialRing(Q5);
