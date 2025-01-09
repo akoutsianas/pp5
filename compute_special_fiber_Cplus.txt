@@ -35,7 +35,6 @@ assert Discriminant(f2) eq 5*c^2;
 
 /////// The case char = 5 - Lemma 7.6///////
 
-K<r5> := QuadraticField(5);
 R<a,b,c> := PolynomialRing(K,3);
 _<x> := PolynomialRing(R);
 
@@ -55,12 +54,12 @@ assert (fb - fbequiv) eq 5*(2*c^2*x^4 - 3*c^4*x^2);
 // We replace b -> 5^7*b since p>= 7
 
 f := (x + 2*c) * (x^5-5*c^2*x^3+5*c^4*x - 2*((c^5 - 5^7*b) - 5^7*b));
-f := Evaluate(f, (r5*x - c)/2)/r5^5;
+f := Evaluate(f, r5*x + 2*c)/r5^5;
 coef := Coefficients(f);
-assert coef eq [3750*r5*b*c - 3/64*r5*c^6, 6250*b - 1/32*c^5, 7/64*r5*c^4, 1/16*c^3, -5/64*r5*c^2, -1/32*c, 1/64*r5];
-fb := 2*c*x^5 + c^3*x^3 + 2*c^5*x;
-fbequiv := 2*c*x*(x - c)^2 * (x + c)^2;
-assert (fb - fbequiv) eq 5*c^3*x^3; 
+assert coef eq [10000*r5*b*c, 12500*b + 4*c^5, 9*r5*c^4, 38*c^3, 15*r5*c^2, 14*c, r5];
+fb := 4*c*x^5 + 3*c^3*x^3 + 4*c^5*x;
+fbequiv := -c*x*(x - 2*c)^2 * (x + 2*c)^2;
+assert (fb - fbequiv) eq 5*(c*x^5 - c^3*x^3 + 4*c^5*x); 
 
 
 

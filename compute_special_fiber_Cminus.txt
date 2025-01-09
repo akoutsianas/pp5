@@ -36,42 +36,39 @@ _<x> := PolynomialRing(R);
 // We replace a -> 5^7*a since p>= 7
 
 f := x^5-5*c^2*x^3+5*c^4*x - 2*(5^7*a - (c^5 - 5^7*a));
-f := Evaluate(f, (-r5*x + c)/2)/r5^5;
+f := Evaluate(f, r5*x - 2*c)/r5^5;
 coef := Coefficients(f);
-assert coef eq [-2500*r5*a + 1/32*r5*c^5, -1/32*c^4, -1/16*r5*c^3, 1/16*c^2, 1/32*r5*c, -1/32];
-fb := 2*x^5 + c^2*x^3 + 2*c^4*x;
-fbequiv := 2*x * (x - c)^2 * (x + c)^2;
-assert (fb - fbequiv) eq 5*c^2*x^3;
+assert coef eq [-2500*r5*a, c^4, -2*r5*c^3, 7*c^2, -2*r5*c, 1];
+fb := x^5 + 2*c^2*x^3 + c^4*x;
+fbequiv := x * (x - 2*c)^2 * (x + 2*c)^2;
+assert (fb - fbequiv) eq 5*(2*c^2*x^3 - 3*c^4*x);
 
 
 //// Case 5|b ////
 // We replace b -> 5^7*b since p>= 7
 
 f := x^5-5*c^2*x^3+5*c^4*x - 2*((c^5 - 5^7*b) - 5^7*b);
-f := Evaluate(f, (r5*x - c)/2)/r5^5;
+f := Evaluate(f, r5*x + 2*c)/r5^5;
 coef := Coefficients(f);
-assert coef eq [2500*r5*b - 1/32*r5*c^5, 1/32*c^4, 1/16*r5*c^3, -1/16*c^2, -1/32*r5*c, 1/32];
-fb := 3*x^5 - c^2*x^3 + 3*c^4*x;
-fbequiv := 3*x * (x - c)^2 * (x + c)^2;
-assert (fb - fbequiv) eq 5*c^2*x^3;
+assert coef eq [2500*r5*b, c^4, 2*r5*c^3, 7*c^2, 2*r5*c, 1];
+fb := x^5 + 2*c^2*x^3 + c^4*x;
+fbequiv := x * (x - 2*c)^2 * (x + 2*c)^2;
+assert (fb - fbequiv) eq 5*(2*c^2*x^3 - 3*c^4*x);
 
 
 
 //// Case 5\nmid ab - Lemma 7.23////
 
 f := x^5-5*c^2*x^3+5*c^4*x - 2*(a - (c^5 - a));
-F := f - (x + a + 2*c)^5;
 
-// We check that the coefficients of F are all divisible by 5. Hence the singular point of the reduction of f is at -a - 2*c mod 5
 
-for coef in Coefficients(F) do
-  for a0 in [1..4] do
-    for c0 in [0..4] do
-      b0 := c0^5 - a0;
-      assert Integers()!(Evaluate(coef, [a0, b0, c0])) mod 5 eq 0;
-    end for;
-  end for;
-end for;
+// We check that the coefficients of f - (x^5 + a + 2*c^5) are all divisible by 5. 
+// Because x^5 + a + 2*c^5 = (x + a + 2*c)^5 mod 5 we get that the singular point of the reduction of f is at -a - 2*c mod 5
+
+F := f - (x^5 + a + 2*c^5);
+assert F eq 5*(-c^2*x^3 + c^4*x - a);
+
+
 
 f := Evaluate(f, x - a - 2*c);
 
@@ -80,10 +77,10 @@ f := Evaluate(f, x - a - 2*c);
 
 // Compute the valuation vectors of the model after the change of variables
 
-for a0 in [1..4] do
-  for c0 in [0..4] do
+for a0 in [1..25] do
+  for c0 in [0..25] do
     b0 := c0^5 - a0;
-    if b0 mod 5 ne 0 then
+    if (a0*b0) mod 5 ne 0 then
       coef0s := [Integers()!(Evaluate(coef, [a0, b0, c0])) : coef in Coefficients(f)];
       d0 := coef0s[1];
       
