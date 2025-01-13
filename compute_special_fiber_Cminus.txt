@@ -17,7 +17,38 @@ fac := Factorization(f);
 
 assert #fac eq 2;
 
+e1 := fac[1][2];
+f1 := fac[1][1];
+assert f1 eq x + 2*c;
+assert e1 eq 1;
+
+e2 := fac[2][2];
 f2 := fac[2][1];
+assert f2 eq x^2 - c*x - c^2;
+assert e2 eq 2;
+
+assert Discriminant(f2) eq 5*c^2;
+
+
+
+// We consider q | b hence b=0\mod q, so in the model below we replace b by 0 and a=c^5 mod q.
+
+f := (x^5-5*c^2*x^3+5*c^4*x - 2*(c^5 - 0));
+
+fac := Factorization(f);
+
+assert #fac eq 2;
+
+e1 := fac[1][2];
+f1 := fac[1][1];
+assert f1 eq x - 2*c;
+assert e1 eq 1;
+
+e2 := fac[2][2];
+f2 := fac[2][1];
+assert f2 eq x^2 + c*x - c^2;
+assert e2 eq 2;
+
 assert Discriminant(f2) eq 5*c^2;
 
 
@@ -69,13 +100,11 @@ F := f - (x^5 + a + 2*c^5);
 assert F eq 5*(-c^2*x^3 + c^4*x - a);
 
 
-
+// Compute the valuation vectors of the model after the first change of variables.
 f := Evaluate(f, x - a - 2*c);
 
-// We check the valuation of the coefficients of f over ZZ and then we get the valuation vectors over M since v_M(5) = 8
-// We take all possible classes modulo 25
-
-// Compute the valuation vectors of the model after the change of variables
+// We check the valuation of the coefficients of f over ZZ and then we get the valuation vectors over M since v_M(5) = 8.
+// We take all possible classes modulo 25 as the valuation vectors as described are invariant under the congruence (a,c) \equiv (a0,c0) mod 25.
 
 for a0 in [1..25] do
   for c0 in [0..25] do
@@ -95,13 +124,17 @@ for a0 in [1..25] do
       assert Valuation(coef0s[3], 5) ge 1;
       assert Valuation(coef0s[4], 5) eq 1;
       assert Valuation(coef0s[5], 5) ge 1;
+
+      print "Checking a0 c0 = ", a0, c0, ": ", [Valuation(coef,5) : coef in coef0s]
+;
     end if;
   end for;
 end for;
 
 
 
-/// Valuation vector over L ///
+// Compute the valuation vector over L after the second change of variables.
+// We take all possible classes modulo 25 as the valuation vectors as described are invariant under the congruence (a,c) \equiv (a0,c0) mod 25.
 
 K<r5> := QuadraticField(5);
 _<x> := PolynomialRing(K);
@@ -128,9 +161,10 @@ for a0 in [1..25] do
         assert val_vector[3] ge 40;
         assert val_vector[4] eq 40;
         assert val_vector[5] ge 40;
+
+        print "Checking a0 c0 = ", a0, c0, ": ", val_vector;
+
       end if;
     end if;
   end for;
 end for;
-
-

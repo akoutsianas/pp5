@@ -16,6 +16,7 @@ G := GaloisRepresentations(M, K);
 for rho in G do
 	if Order(InertiaGroup(rho)) eq 4 then
 		print "Dimension = ", Dimension(rho);
+    assert Dimension(rho) eq 1;
 		assert Valuation(Conductor(rho)) eq 1;
 	end if;
 end for;
@@ -41,15 +42,14 @@ for a0:=0 to N-1 do
 			OK := Integers(K);
 			G := GaloisRepresentations(L,K);
 
-    			for rho in G do
-      				if Order(InertiaGroup(rho)) eq 20 then
-					print "Dimension = ", Dimension(rho);
-       					assert Valuation(Conductor(rho)) eq 3;
-				end if;
+			for rho in G do
+  			if Order(InertiaGroup(rho)) eq 20 then
+          print "Dimension = ", Dimension(rho);
+          assert Dimension(rho) eq 2;
+  				assert Valuation(Conductor(rho)) eq 3;
+        end if;
 			end for;
-    			print "The conductor exponent is = 3.";
-
-
+			print "The conductor exponent is = 3.";
 		end if;
 	end for;
 end for;
